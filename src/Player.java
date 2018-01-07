@@ -1,8 +1,8 @@
 public class Player {
-    private int positionx = 0;
-    private int positiony = 0;
+    private int positionx;
+    private int positiony;
     private Fraction score;
-    private String playersymbol = "";
+    private String playersymbol;
 
     public Player(int x, int y, String p) {
         this.positionx = x;

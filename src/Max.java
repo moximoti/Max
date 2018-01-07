@@ -5,7 +5,7 @@ public class Max {
     static final Fraction win = new Fraction(80);
     static final int boardw = 8; // Spielbrett Breite
     static final int boardh = 8; // Spielbrett Höhe
-    static final int anzSpieler = 2; // anzahl spieler
+    static final int anzSpieler = 2; // anzahl Spieler
 
     // Globale Variablen
     public static Fraction[][] fracBoard = new Fraction[boardw][boardh];
