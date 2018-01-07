@@ -4,10 +4,10 @@ public class Player {
     private Fraction score;
     private String playersymbol = "";
 
-    public Player(int x, int y, Fraction s, String p) {
+    public Player(int x, int y, String p) {
         this.positionx = x;
         this.positiony = y;
-        this.score = s;
+        this.score = new Fraction(0);
         this.playersymbol = p;
     }
 
