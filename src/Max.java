@@ -1,60 +1,40 @@
 import java.util.Random;
 
 public class Max {
+    // Settings
+    static final Fraction win = new Fraction(80);
+    static final int boardw = 8; // Spielbrett Breite
+    static final int boardh = 8; // Spielbrett Höhe
+    static final int anzSpieler = 2; // Anzahl Spieler
 
-    static Fraction win = new Fraction(80);
-    static int boardw = 8; // Spielbrett Breite
-    static int boardh = 8; // Spielbrett Höhe
-    static Fraction[][] fracBoard = new Fraction[boardw][boardh];
-
-    static Player p1 = new Player(4,3,new Fraction(0),"--B--");
-    static Player p2 = new Player(3,4,new Fraction(0),"--W--");
-
-
+    // Globale Variablen
+    public static Fraction[][] fracBoard = new Fraction[boardw][boardh];
+    public static Player[] spieler = new Player[anzSpieler];
 
     public static void main(String[] args) {
-        // Spielbrett erstellen und mit Zufallszahlen belegen
-        fracBoard = initFractionsBoard();
-        drawBoardString(storeBoardString(fracBoard));
+        // Spielerobjekte erstellen
 
-        for (int i = 0;; i++) {
-            if (i%2==0) {
-                p1.spielzug();
-                drawBoardString(storeBoardString(fracBoard));
-                if(p1.getScore().doubleValue() >= win.doubleValue()) {
-                    System.out.println(p1.getPSymbol().concat(" gewinnt!"));
-                    System.out.println("Spiel beendet!");
-                    break;
-                }
-            }
-            if (i%2==1) {
-                p2.spielzug();
-                drawBoardString(storeBoardString(fracBoard));
-                if(p2.getScore().doubleValue() >= win.doubleValue()) {
-                    System.out.println(p2.getPSymbol().concat(" gewinnt!"));
-                    System.out.println("Spiel beendet!");
-                    break;
-                }
-            }
-
+        for (int i = 0; i < spieler.length; i++) {
+            if (i==0) spieler[i] = new Player(4, 3, new Fraction(0), "B");
+            if (i==1) spieler[i] = new Player(3,4,new Fraction(0),"W");
+            if (i>=2) spieler[i] = new Player(new Random().nextInt(7),new Random().nextInt(7),new Fraction(0),IO.readString("Spieler "+(i+1)+" Bitte Spielersymbol wählen: "));
+            //System.out.println(spieler[i].getPSymbol());
         }
 
-    }
+        // Spielbrett erstellen und mit Zufallszahlen belegen
+        fracBoard = initFractionsBoard();
+        System.out.println(drawBoardString(storeBoardString(fracBoard)));
 
-    // nicht benötigt
-    public static void drawBoardFrac(Fraction[][] board) {
-
-        for (int y = 0; y < board.length; y++) {
-            for (int x = 0; x < board[y].length; x++) {
-                String out = "";
-                for (int i = board[x][y].toString().length(); i < 5; i++) {
-                    out = out.concat("");
-                }
-                System.out.print(out+board[x][y].longValue()+"  ");
-                //System.out.print(x+"(x) "+y+"()    ");
+        // Spieler abwechselnd am Zug
+        int playeriterator;
+        for (int i = 0;; i++) {
+            playeriterator = i%anzSpieler;
+            spielzug(spieler[playeriterator]);
+            if(spieler[playeriterator].getScore().doubleValue() >= win.doubleValue()) {
+                System.out.println(spieler[playeriterator].getPSymbol().concat(" gewinnt!"));
+                System.out.println("Spiel beendet!");
+                break;
             }
-            System.out.println();
-            System.out.println();
         }
     }
 
@@ -69,9 +49,13 @@ public class Max {
         return temp;
     }
 
-    public static void drawBoardString(String[][] board) {
-        board[p1.getX()][p1.getY()] = p1.getPSymbol();
-        board[p2.getX()][p2.getY()] = p2.getPSymbol();
+    public static String drawBoardString(String[][] board) {
+        // get Player Positions
+        for (int i = 0; i < spieler.length; i++) {
+            board[spieler[i].getX()][spieler[i].getY()] = spieler[i].getPSymbol();
+        }
+
+        String matrixoutput = "";
         for (int y = 0; y < board.length; y++) {
             for (int x = 0; x < board[y].length; x++) {
                 String out = "";
@@ -79,12 +63,14 @@ public class Max {
                     out = out.concat(" ");
                 }
                 //System.out.print(board[x][y]+out +"  ");
-                System.out.print(out+board[x][y]+"  ");
+                //System.out.print(out+board[x][y]+"  ");
+                matrixoutput += out+board[x][y]+"  ";
                 //System.out.print(x+"(x) "+y+"()    ");
             }
-            System.out.println();
-            System.out.println();
+            matrixoutput += "\n\n"; //System.out.println();
+            //System.out.println();
         }
+        return matrixoutput;
     }
 
     public static Fraction[][] initFractionsBoard() {
@@ -104,6 +90,32 @@ public class Max {
         } while (random.longValue()<=1 || random.longValue()>=10);
 
         return random;
+    }
+
+    public static void spielzug(Player x){
+        x.bewegen();
+        ausgabe();
+    }
+
+    public static void ausgabe(){
+        // Spielfeld
+        System.out.println(drawBoardString(storeBoardString(fracBoard)));
+        // Spielstatus
+        System.out.println("Punktestand:");
+        for (int i = 0; i < spieler.length; i++) {
+            System.out.println(spieler[i].getScoreString());
+        }
+        System.out.println();
+    }
+
+    public static boolean checkPlayerPosition(Player p, int x, int y) {
+        boolean notinUse = true;
+
+        for (int i = 0; i < spieler.length; i++) {
+            if (p.getPSymbol().equals(spieler[i].getPSymbol())) continue;
+            if (spieler[i].getX() == x & spieler[i].getY() == y) notinUse = false;
+        }
+        return notinUse;
     }
 
 
