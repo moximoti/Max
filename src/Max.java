@@ -5,7 +5,7 @@ public class Max {
     static final Fraction win = new Fraction(80);
     static final int boardw = 8; // Spielbrett Breite
     static final int boardh = 8; // Spielbrett Höhe
-    static final int anzSpieler = 2; // anzahl Spieler
+    static final int anzSpieler = 2; // Anzahl Spieler
 
     // Globale Variablen
     public static Fraction[][] fracBoard = new Fraction[boardw][boardh];
@@ -89,7 +89,7 @@ public class Max {
     public static Fraction randomFrac(){
         Fraction random;
         do {
-            random = new Fraction(Math.abs(new Random().nextLong()%99),Math.abs(new Random().nextLong()%99)+1);
+            random = new Fraction(Math.abs(new Random().nextLong()%99)+1,Math.abs(new Random().nextLong()%99)+1);
         } while (random.longValue()<=1 || random.longValue()>=10);
 
         return random;
