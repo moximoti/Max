@@ -9,6 +9,7 @@ public class Gameboard {
         this.hoehe = boardh;
         this.breite = boardw;
         this.board = new Fraction[boardw][boardh];
+        this.initFractionsBoard();
     }
 
     public String drawBoardString() {

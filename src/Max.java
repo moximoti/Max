@@ -8,8 +8,9 @@ public class Max {
     static final int anzSpieler = 2; // Anzahl Spieler
 
     // Globale Variablen
-    //public static Fraction[][] fracBoard = new Fraction[boardw][boardh];
     public static Player[] spieler = new Player[anzSpieler];
+
+    // Spielbrett erstellen mit Zufallszahlen belegen und ausgeben
     public static Gameboard spielfeld = new Gameboard(boardw, boardh);
 
 
@@ -19,13 +20,12 @@ public class Max {
         for (int i = 0; i < spieler.length; i++) {
             if (i==0) spieler[i] = new Player(4, 3, "- B -");
             if (i==1) spieler[i] = new Player(3,4,"- W -");
-            if (i==2) spieler[i] = new Player(0,0,"- X -");
-            if (i==3) spieler[i] = new Player(7,7,"- Y -");
+            if (i==2) spieler[i] = new Player(1,1,"- X -");
+            if (i==3) spieler[i] = new Player(6,6,"- Y -");
             if (i>=4) spieler[i] = new Player(new Random().nextInt(7),new Random().nextInt(7),IO.readString("Spieler "+(i+1)+" Bitte Spielersymbol wählen: "));
         }
 
-        // Spielbrett erstellen mit Zufallszahlen belegen und ausgeben
-        spielfeld.initFractionsBoard();
+        // Anfangs-Spielbrett ausgeben
         ausgabe();
 
         // Spieler abwechselnd am Zug
