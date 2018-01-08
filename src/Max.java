@@ -5,10 +5,11 @@ public class Max {
     static final Fraction win = new Fraction(80);
     static final int boardw = 8; // Spielbrett Breite
     static final int boardh = 8; // Spielbrett Höhe
-    static final int anzSpieler = 2; // Anzahl Spieler
+    static final int anzSpieler = 4; // Anzahl Spieler
 
     // Globale Variablen
     public static Fraction[][] fracBoard = new Fraction[boardw][boardh];
+    // public static Spielfeld board = new Spielfeld(HöheUndBreite_8, );
     public static Player[] spieler = new Player[anzSpieler];
 
     public static void main(String[] args) {
@@ -62,6 +63,7 @@ public class Max {
         for (int y = 0; y < board.length; y++) {
             for (int x = 0; x < board[y].length; x++) {
                 String out = "";
+                // Strings auffüllen
                 for (int i = board[x][y].length(); i < 5; i++) { //vorher i < 5
                     out = out.concat(" ");
                 }
@@ -110,16 +112,5 @@ public class Max {
         }
         System.out.println();
     }
-
-    public static boolean checkPlayerPosition(Player p, int x, int y) {
-        boolean notinUse = true;
-
-        for (int i = 0; i < spieler.length; i++) {
-            if (p.getPSymbol().equals(spieler[i].getPSymbol())) continue;
-            if (spieler[i].getX() == x & spieler[i].getY() == y) notinUse = false;
-        }
-        return notinUse;
-    }
-
 
 }

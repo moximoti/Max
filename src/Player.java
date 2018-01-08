@@ -77,7 +77,7 @@ public class Player {
         }
 
         // Zug ausführen wenn Feld frei
-        if (Max.checkPlayerPosition(this,this.getX()+x,this.getY()+y)) {
+        if (checkPlayerPosition(this,this.getX()+x,this.getY()+y)) {
             Max.fracBoard[this.getX()][this.getY()] = new Fraction(0);
             setPosition(this.positionx+x,this.positiony+y);
             setScore();
@@ -86,4 +86,17 @@ public class Player {
             bewegen("Spieler können sich dieses Feld nicht teilen! Bitte andere Richtung wählen: ");
             }
     }
+
+    public static boolean checkPlayerPosition(Player p, int x, int y) {
+        boolean notinUse = true;
+
+        for (int i = 0; i < Max.spieler.length; i++) {
+            if (p.getPSymbol().equals(Max.spieler[i].getPSymbol())) continue;
+            if (Max.spieler[i].getX() == x & Max.spieler[i].getY() == y) notinUse = false;
+        }
+        return notinUse;
+    }
+
+
+
 }
