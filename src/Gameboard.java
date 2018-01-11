@@ -5,6 +5,7 @@ public class Gameboard {
     int hoehe;
     int breite;
 
+    // Konstruktor
     public Gameboard(int boardw, int boardh) {
         this.hoehe = boardh;
         this.breite = boardw;
@@ -14,10 +15,10 @@ public class Gameboard {
 
     public String drawBoardString() {
 
+        // Fraction Matrix in String Matrix umwandeln
         String[][] temp = new String[breite][hoehe];
         for (int y = 0; y < board.length; y++) {
             for (int x = 0; x < board[y].length; x++) {
-                //temp[x][y] = String.valueOf(board[x][y].floatValue());
                 temp[x][y] = String.valueOf(board[x][y]);
             }
         }
@@ -27,18 +28,27 @@ public class Gameboard {
             temp[Max.spieler[i].getX()][Max.spieler[i].getY()] = Max.spieler[i].getPSymbol();
         }
 
-        String matrixoutput = "";
-        for (int y = 0; y < temp.length; y++) {
-            for (int x = 0; x < temp[y].length; x++) {
-                String out = "";
+        // Trenner zwischen Feldern einfügen
+        String divider = "+";
+        for (int i = 0; i < breite; i++) {
+            divider += "-------+";
+        }
 
-                // Strings auffüllen
-                for (int i = temp[x][y].length(); i < 5; i++) { //vorher i < 5
-                    out = out.concat(" ");
+        // Spielfeld zeichnen
+        String matrixoutput = divider+"\n";
+        for (int y = 0; y < temp.length; y++) {
+            matrixoutput += "| ";
+            for (int x = 0; x < temp[y].length; x++) {
+
+                // Fleder mit Leerzeichen auffüllen, wenn kürzer als 5
+                String feld = "";
+                for (int i = temp[x][y].length(); i < 5; i++) {
+                    feld = feld.concat(" ");
                 }
-                matrixoutput += out+temp[x][y]+"  ";
+
+                matrixoutput += feld+temp[x][y]+" | ";
             }
-            matrixoutput += "\n\n";
+            matrixoutput += "\n"+divider+"\n";
         }
         return matrixoutput;
     }
@@ -52,14 +62,6 @@ public class Gameboard {
         }
     }
 
-    public static Fraction randomFrac(){
-        Fraction random;
-        do {
-            random = new Fraction(Math.abs(new Random().nextLong()%99)+1,Math.abs(new Random().nextLong()%99)+1);
-        } while (random.longValue()<=1 || random.longValue()>=10);
-
-        return random;
-    }
     public Fraction getValue (int x, int y){
         return board[x][y];
     }
@@ -68,5 +70,16 @@ public class Gameboard {
         board[x][y] = value;
     }
 
+    public static Fraction randomFrac(){
+        Fraction frac;
+        int zaehler, nenner;
+        do {
+            zaehler = Math.abs(new Random().nextInt(99))+1;
+            nenner = Math.abs(new Random().nextInt(99))+1;
+            frac = new Fraction(zaehler,nenner);
+        } while (frac.floatValue()<1 || frac.floatValue()>10);
+
+        return frac;
+    }
 
 }

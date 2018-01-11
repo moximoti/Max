@@ -1,19 +1,19 @@
 public class Player {
-    private int positionx;
-    private int positiony;
+    private int posX;
+    private int posY;
     private Fraction score;
     private String playersymbol;
 
     public Player(int x, int y, String p) {
-        this.positionx = x;
-        this.positiony = y;
+        this.posX = x;
+        this.posY = y;
         this.score = new Fraction(0);
         this.playersymbol = p;
     }
 
     public void setPosition(int x, int y){
-        this.positionx = x;
-        this.positiony = y;
+        this.posX = x;
+        this.posY = y;
     }
 
     public String getScoreString() {
@@ -25,10 +25,10 @@ public class Player {
     }
 
     public int getX(){
-        return this.positionx;
+        return this.posX;
     }
     public int getY(){
-        return this.positiony;
+        return this.posY;
     }
     public String getPSymbol(){
         return this.playersymbol;
@@ -51,22 +51,22 @@ public class Player {
         // Zug berechnen
         switch (richtung) {
             case "n":
-                if (this.positiony > 0)
+                if (this.posY > 0)
                     y = -1;
                 else bewegen("Spielfeldrand erreicht! Bitte andere Richtung wählen: ");
                 break;
             case "s":
-                if (this.positiony+1 < Max.boardh)
+                if (this.posY +1 < Max.boardh)
                     y = 1;
                 else bewegen("Spielfeldrand erreicht! Bitte andere Richtung wählen: ");
                 break;
             case "w":
-                if (this.positionx > 0)
+                if (this.posX > 0)
                     x = -1;
                 else bewegen("Spielfeldrand erreicht! Bitte andere Richtung wählen: ");
                 break;
             case "o":
-                if (this.positionx+1 < Max.boardw)
+                if (this.posX +1 < Max.boardw)
                     x = 1;
                 else bewegen("Spielfeldrand erreicht! Bitte andere Richtung wählen: ");
                 break;
@@ -80,7 +80,7 @@ public class Player {
         // Zug ausführen wenn Feld frei
         if (checkPlayerPosition(this,this.getX()+x,this.getY()+y)) {
             Max.spielfeld.setValue(getX(),getY(), new Fraction(0));
-            setPosition(this.positionx+x,this.positiony+y);
+            setPosition(this.posX +x,this.posY +y);
             setScore();
             System.out.println();
         } else {
