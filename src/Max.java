@@ -2,10 +2,10 @@ import java.util.Random;
 
 public class Max {
     // Settings
-    static final Fraction win = new Fraction(5);
+    static final Fraction win = new Fraction(20);
     static final int boardw = 8; // Spielbrett Breite
     static final int boardh = 8; // Spielbrett Höhe
-    static final int anzSpieler = 6; // Anzahl Spieler
+    static final int anzSpieler = 2; // Anzahl Spieler
 
     // Globale Variablen
     public static Player[] spieler;

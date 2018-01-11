@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e614f9f4-4102-4ce3-93a6-f56c2857eac3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Max/Gameboard.class" afterPath="$PROJECT_DIR$/out/production/Max/Gameboard.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Max/Max.class" afterPath="$PROJECT_DIR$/out/production/Max/Max.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Max/Player.class" afterPath="$PROJECT_DIR$/out/production/Max/Player.class" />
-      <change beforePath="$PROJECT_DIR$/src/Gameboard.java" afterPath="$PROJECT_DIR$/src/Gameboard.java" />
       <change beforePath="$PROJECT_DIR$/src/Max.java" afterPath="$PROJECT_DIR$/src/Max.java" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" afterPath="$PROJECT_DIR$/src/Player.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,8 +27,8 @@
       <file leaf-file-name="Max.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Max.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="50" column="13" lean-forward="false" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
+            <state relative-caret-position="-524">
+              <caret line="4" column="47" lean-forward="false" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -328,12 +322,12 @@
       <option name="presentableId" value="Default" />
       <updated>1515157615627</updated>
       <workItem from="1515157618408" duration="1042000" />
-      <workItem from="1515584919905" duration="11180000" />
+      <workItem from="1515584919905" duration="11413000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18613000" />
+    <option name="totallyTimeSpent" value="18846000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="976" extended-state="0" />
@@ -601,8 +595,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Max.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="50" column="13" lean-forward="false" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
+        <state relative-caret-position="-524">
+          <caret line="4" column="47" lean-forward="false" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
           <folding />
         </state>
       </provider>
