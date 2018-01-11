@@ -1,3 +1,11 @@
+/**
+ * @author Timo Volkmann (199267)
+ * @author Patrick Pitz ()
+ * @author Marcel Ambros ()
+ * @version 3.0
+ *
+ */
+
 import java.util.Random;
 
 public class Max {

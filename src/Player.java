@@ -1,68 +1,72 @@
+/**
+ * @author Timo Volkmann (199267)
+ * @author Patrick Pitz ()
+ * @author Marcel Ambros ()
+ * @version 3.0
+ *
+ */
+
 public class Player {
-    private int posX;
-    private int posY;
+    private int x;
+    private int y;
     private Fraction score;
     private String playersymbol;
 
     public Player(int x, int y, String p) {
-        this.posX = x;
-        this.posY = y;
+        this.x = x;
+        this.y = y;
         this.score = new Fraction(0);
         this.playersymbol = p;
-        Max.spielfeld.setValue(posX,posY, new Fraction(0));
+        Max.spielfeld.setValue(x,y, new Fraction(0));
     }
 
     public String getScoreString() {
-        return String.valueOf(score.floatValue()).concat(" ["+playersymbol+"] ");
-    }
-    public Fraction getScore() {
-        return score;
+        return score.floatValue()+ " [" + playersymbol + "] ";
     }
 
-    public int getX(){
-        return posX;
+    public Fraction getScore() {
+        return this.score;
     }
-    public int getY(){
-        return posY;
+
+    public int getX() {
+        return x;
     }
-    public String getPSymbol(){
+
+    public int getY() {
+        return y;
+    }
+
+    public String getPSymbol() {
         return playersymbol;
     }
 
-    public void addScore(){
-        score = score.add(Max.spielfeld.getValue(getX(),getY()));
+    public void addScore() {
+        this.score = this.score.add(Max.spielfeld.getValue(getX(), getY()));
     }
 
     public void bewegen() {
         String temp = playersymbol.concat(" ist am Zug. Bitte Richtung eingeben (n,s,w,o): ");
         bewegen(temp);
     }
+
     public void bewegen(String ask) {
         String richtung = IO.readString(ask);
-        int x =0;
-        int y =0;
+        int posX = x;
+        int posY = y;
 
         // Zug berechnen
         switch (richtung) {
             case "n":
-                if (posY > 0)
-                    y = -1;
-                else bewegen("Spielfeldrand erreicht! Bitte andere Richtung wählen: ");
+                posY--;
                 break;
             case "s":
-                if (posY +1 < Max.boardh)
-                    y = 1;
-                else bewegen("Spielfeldrand erreicht! Bitte andere Richtung wählen: ");
+                posY++;
                 break;
             case "w":
-                if (posX > 0)
-                    x = -1;
-                else bewegen("Spielfeldrand erreicht! Bitte andere Richtung wählen: ");
+                posX--;
                 break;
             case "o":
-                if (posX +1 < Max.boardw)
-                    x = 1;
-                else bewegen("Spielfeldrand erreicht! Bitte andere Richtung wählen: ");
+                posX++;
                 break;
             case "exit":
                 System.exit(0);
@@ -71,31 +75,29 @@ public class Player {
                 bewegen();
         }
 
-        // Zug ausführen wenn Feld frei
-        if (checkPlayerPosition(getX()+x,getY()+y)) {
-            posX += x;
-            posY += y;
+        if (isMovePossible(posX, posY)) {
+            x = posX;
+            y = posY;
             addScore();
             Max.spielfeld.setValue(posX,posY, new Fraction(0));
             Max.spielfeld.checkGameboard();
-            System.out.println();
         } else {
-            bewegen("Spieler können sich dieses Feld nicht teilen! Bitte andere Richtung wählen: ");
-            }
-    }
-
-    public boolean checkPlayerPosition(int x, int y) {
-        boolean notInUse = true;
-
-        for (int i = 0; i < Max.spieler.length; i++) {
-            // eigene Position überspringen
-            if (equals(Max.spieler[i])) continue;
-            // wenn Position übereinstimmt, setze notInUse auf false
-            if (Max.spieler[i].posX == x & Max.spieler[i].posY == y) notInUse = false;
+            bewegen();
         }
-        return notInUse;
     }
 
-
-
+    private boolean isMovePossible(int moveX, int moveY) {
+        if (moveX < 0 || moveY < 0 || moveX >= Max.boardh || moveY >= Max.boardw) {
+            System.out.println("Spielfeldrand erreicht. Bitte andere Richtung wählen! ");
+            return false;
+        }
+        for (Player p : Max.spieler) {
+            if (equals(p)) continue;
+            if ((p.x == moveX && p.y == moveY)) {
+                System.out.println("Spieler können sich dieses Feld nicht teilen. Bitte andere Richtung wählen! ");
+                return false;
+            }
+        }
+        return true;
+    }
 }
