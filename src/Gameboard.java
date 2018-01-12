@@ -17,23 +17,23 @@ public class Gameboard {
     public Gameboard(int boardw, int boardh) {
         this.hoehe = boardh;
         this.breite = boardw;
-        this.board = new Fraction[boardw][boardh];
+        this.board = new Fraction[boardh][boardw];
         this.initFractionsBoard();
     }
 
     public String drawBoardString() {
 
         // Fraction Matrix in String Matrix umwandeln
-        String[][] temp = new String[breite][hoehe];
+        String[][] temp = new String[hoehe][breite];
         for (int y = 0; y < board.length; y++) {
             for (int x = 0; x < board[y].length; x++) {
-                temp[x][y] = String.valueOf(board[x][y]);
+                temp[y][x] = String.valueOf(board[y][x]);
             }
         }
 
         // get Player Positions
-        for (int i = 0; i < Max.spieler.length; i++) {
-            temp[Max.spieler[i].getX()][Max.spieler[i].getY()] = Max.spieler[i].getPSymbol();
+        for (Player p : Max.spieler) {
+            temp[p.getY()][p.getX()] = p.getPSymbol();
         }
 
         // Trenner zwischen Feldern einfügen
@@ -50,11 +50,11 @@ public class Gameboard {
 
                 // Fleder mit Leerzeichen auffüllen, wenn kürzer als 5
                 String feld = "";
-                for (int i = temp[x][y].length(); i < 5; i++) {
+                for (int i = temp[y][x].length(); i < 5; i++) {
                     feld += " ";
                 }
 
-                matrixoutput += feld+temp[x][y]+" | ";
+                matrixoutput += feld+temp[y][x]+" | ";
             }
             matrixoutput += "\n"+divider+"\n";
         }
@@ -63,20 +63,20 @@ public class Gameboard {
 
     // Spielfeld erstellen und mit Zufallszahlen belegen
     public void initFractionsBoard() {
-        board = new Fraction[breite][hoehe];
+        board = new Fraction[hoehe][breite];
         for (int y = 0; y < hoehe; y++) {
             for (int x = 0; x < breite; x++) {
-                board[x][y] = randomFrac();
+                board[y][x] = randomFrac();
             }
         }
     }
 
     public Fraction getValue (int x, int y){
-        return board[x][y];
+        return board[y][x];
     }
 
     public void setValue (int x, int y, Fraction value){
-        board[x][y] = value;
+        board[y][x] = value;
     }
 
     // Neue Zufallszahlen, wenn alle Felder leer sind
@@ -84,14 +84,14 @@ public class Gameboard {
         boolean allEmpty = true;
         for (int y = 0; y < hoehe; y++) {
             for (int x = 0; x < breite; x++) {
-                if (board[x][y].floatValue() != 0) allEmpty = false;
+                if (board[y][x].floatValue() != 0) allEmpty = false;
             }
         }
         if(allEmpty) {
             initFractionsBoard();
             // An Spielerpositionen wieder mit 0 überschreiben
-            for (int i = 0; i < Max.spieler.length; i++) {
-                setValue(Max.spieler[i].getX(),Max.spieler[i].getY(), new Fraction(0));
+            for (Player p : Max.spieler) {
+                setValue(p.getX(),p.getY(), new Fraction(0));
             }
         }
     }

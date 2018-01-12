@@ -1,3 +1,7 @@
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  * @author Timo Volkmann (199267)
  * @author Patrick Pitz ()
@@ -21,7 +25,9 @@ public class Player {
     }
 
     public String getScoreString() {
-        return score.floatValue()+ " [" + playersymbol + "] ";
+        NumberFormat scoreFormat = NumberFormat.getNumberInstance(Locale.US);
+        ((DecimalFormat) scoreFormat).applyPattern("###00.0");
+        return scoreFormat.format(score.floatValue())+ " [" + playersymbol + "] ";
     }
 
     public Fraction getScore() {
@@ -87,7 +93,7 @@ public class Player {
     }
 
     private boolean isMovePossible(int moveX, int moveY) {
-        if (moveX < 0 || moveY < 0 || moveX >= Max.boardh || moveY >= Max.boardw) {
+        if (moveX < 0 || moveY < 0 || moveY >= Max.boardh || moveX >= Max.boardw) {
             System.out.println("Spielfeldrand erreicht. Bitte andere Richtung wählen! ");
             return false;
         }

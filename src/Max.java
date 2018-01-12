@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Max {
     // Settings
-    static final Fraction win = new Fraction(20);
+    static final Fraction win = new Fraction(80);
     static final int boardw = 8; // Spielbrett Breite
     static final int boardh = 8; // Spielbrett Höhe
     static final int anzSpieler = 2; // Anzahl Spieler
@@ -70,8 +70,8 @@ public class Max {
         System.out.println(spielfeld.drawBoardString());
         // Spielstatus
         System.out.println("Punktestand:");
-        for (int i = 0; i < spieler.length; i++) {
-            System.out.println(spieler[i].getScoreString());
+        for (Player p : spieler) {
+            System.out.println(p.getScoreString());
         }
         System.out.println();
     }
